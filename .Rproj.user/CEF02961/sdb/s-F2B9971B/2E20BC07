@@ -1,0 +1,17 @@
+{
+    "contents" : "\n# This is the server logic for a Shiny web application.\n# You can find out more about building applications with Shiny here:\n#\n# http://shiny.rstudio.com\n#\n# using library ROracle\nlibrary(ROracle)\nlibrary(shinydashboard)\n\n#server <-\n  function(input, output) {\n  \n  # set the driver for Oracle\n  drv <-dbDriver(\"Oracle\")\n  \n  # set the connection (for ENGUA at the moment)\n  con <-dbConnect(drv, username =\"app_owner\", password = \"XX\", dbname = \"xx\")\n  \n  #save the query results to july_cx_data\n  july_cx_data <- dbGetQuery(con, \"SELECT FLYDATA.REFDATE,DEP,CASE WHEN delay_code IN ('RTECH', 'TECH') THEN 'TECH' WHEN delay_code = 'WEAT' THEN 'WEAT' WHEN delay_code IN ('CREW', 'CABC', 'PILO') THEN 'CREW' ELSE 'OTHER'  END        delay_grouping  FROM FLYDATA, DELAY_DETAIL WHERE     FLYDATA.FLYDATA_ID = DELAY_DETAIL.FLYDATA_ID(+)       AND FLYDATA.REFDATE BETWEEN '01-jul-2015' AND '15-jul-2015'       AND FLYDATA.LEGTYPE = 'CX'       AND FLYDATA.LEGTYPE IS NOT NULL       AND FLYDATA.stc = 'J'       AND FLYDATA.AIRLINE = 'BE'\")\n  \n  # this is setting up the drop down select but so it can be used in the UI bit. very swish!\n  output$stationSelect <- renderUI ({\n    allStations <- july_cx_data$DEP\n    selectInput (\"stations\", \"pick a station\", choices = allStations)\n  })\n  \n\n  \n  output$canx_flights <- renderPlot(\n    \n    {data <- table(july_cx_data$DELAY_GROUPING) \n    \n    barplot(data, \n            main = \"Canx flights\", \n            #horiz =  TRUE,\n            xlab = \"Reasons\", \n            col = \"purple\")})\n}\n\n#shinyApp(uix,server)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n# \n# \n# library(shiny)\n# \n# shinyServer(function(input, output) {\n# \n#   output$distPlot <- renderPlot({\n# \n#     # generate bins based on input$bins from ui.R\n#     x    <- faithful[, 2]\n#     bins <- seq(min(x), max(x), length.out = input$bins + 1)\n# \n#     # draw the histogram with the specified number of bins\n#     hist(x, breaks = bins, col = 'darkgray', border = 'white')\n# \n#   })\n# \n# })\n",
+    "created" : 1437561648130.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "1336531864",
+    "id" : "2E20BC07",
+    "lastKnownWriteTime" : 1437579865,
+    "path" : "C:/RStudio_Projects/Shiny GOps/server.R",
+    "project_path" : "server.R",
+    "properties" : {
+    },
+    "relative_order" : 2,
+    "source_on_save" : false,
+    "type" : "r_source"
+}

@@ -1,0 +1,17 @@
+{
+    "contents" : "\n# This is the user-interface definition of a Shiny web application.\n# You can find out more about building applications with Shiny here:\n#\n# http://shiny.rstudio.com\n#\n\n\nlibrary(shiny)\nlibrary(shinydashboard)\n\n#ui <- \n  dashboardPage(dashboardHeader(title = \"Ground Ops Dashboard v0.1\"),\n                    dashboardSidebar(),\n                    dashboardBody(\n                      # boxes need to be put in a row or column\n                      fluidRow(\n                        box(plotOutput(\"canx_flights\", height = 300)),\n                        \n                        box(title = \"some title here\",\n                            #selectInput(\"stations\",\"choose a departure station\", \"dropdownsx\"),\n                            sliderInput (\"slider\",\"number of observations:\", 1,100,50)\n                        )\n                        ,\n                        box(title = \"attempt 2\", uiOutput(\"stationSelect\"))\n                      )\n                    )\n)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n# library(shiny)\n# \n# shinyUI(fluidPage(\n# \n#   # Application title\n#   titlePanel(\"Ground Operations Dashboard\"),\n# \n#   # Sidebar with a slider input for number of bins\n#   sidebarLayout(\n#     sidebarPanel(\n#       sliderInput(\"bins\",\n#                   \"Number of bins:\",\n#                   min = 1,\n#                   max = 50,\n#                   value = 30)\n#     ),\n#     \n# \n#     # Show a plot of the generated distribution\n#     mainPanel(\n#       plotOutput(\"distPlot\")\n#     )\n#   )\n# ))\n",
+    "created" : 1437561647894.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "4195954232",
+    "id" : "529A85F6",
+    "lastKnownWriteTime" : 1437573083,
+    "path" : "C:/RStudio_Projects/Shiny GOps/ui.R",
+    "project_path" : "ui.R",
+    "properties" : {
+    },
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "type" : "r_source"
+}
